@@ -29,7 +29,7 @@ logit2prob <- function(logit){
   return(prob)
 }
 
-logit2prob(coef(model_pt1))
+probabilities <- logit2prob(coef(model_pt1))
 
 ```
 
