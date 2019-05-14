@@ -22,5 +22,14 @@ binomial linear regression for part 1
 model_pt1 <- glm(vote ~ age + income + NEP + risk + bid, data = whale_data, family = "binomial")
 
 summary(model_pt1)
+
+logit2prob <- function(logit){
+  odds <- exp(logit)
+  prob <- odds / (1 + odds)
+  return(prob)
+}
+
+logit2prob(coef(model_pt1))
+
 ```
 
