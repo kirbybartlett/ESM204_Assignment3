@@ -23,9 +23,20 @@ model_pt1 <- lm(vote ~ age + income + NEP + risk + bid, data = whale_data, famil
 
 summary(model_pt1)
 
+summary(model_pt1)
 
 ```
 Part 2:
 
-Use 60% as your risk and know that that saves 15 whales
-Have vote as 1 and solve for bid
+
+Use 60% as your risk and know that that saves 15 whales. Solve. 
+Have vote as 1 and solve for bid. Then divide by 15 to get value of 1 whale
+
+Part 3:
+Pick three people and put in their info and solve for vote. Then set vote to 1 and solve for bid. 
+
+Part 4:
+Would you take the average of all parameters and plug that in to solve for vote, then set vote to 1 and solve for bid?
+
+Part 5:
+Multiply average by 150,000
