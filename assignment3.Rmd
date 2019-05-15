@@ -19,17 +19,13 @@ whale_data <- read_csv("HW3Data.csv")
 
 binomial linear regression for part 1
 ```{r}
-model_pt1 <- glm(vote ~ age + income + NEP + risk + bid, data = whale_data, family = "binomial")
+model_pt1 <- lm(vote ~ age + income + NEP + risk + bid, data = whale_data, family = "linear")
 
 summary(model_pt1)
 
-logit2prob <- function(logit){
-  odds <- exp(logit)
-  prob <- odds / (1 + odds)
-  return(prob)
-}
-
-probabilities <- logit2prob(coef(model_pt1))
 
 ```
+Part 2:
 
+Use 60% as your risk and know that that saves 15 whales
+Have vote as 1 and solve for bid
