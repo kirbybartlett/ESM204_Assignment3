@@ -64,7 +64,6 @@ bid_fifteen<- function (a,b,c,d,e,g,h,j,k,l,m) {(1- (coeffs[2](a) + coeffs[3](b)
 
 bid_single<- bidfifteen/15
 
-
 ```
 
 Original Function
@@ -112,3 +111,12 @@ Would you take the average of all parameters and plug that in to solve for vote,
 
 Part 5:
 Multiply average by 150,000
+
+Part 6:
+Compare answer in 5 to $7 million
+
+Part 7:
+Is it $50 per ton? Because 50x20 tons carbon saved is 1,000 dollars which is the cost of going slower
+
+Part 8:
+60% risk reduction means 15 whales saved? Multiply what you found in part 2 by 15 to get the total benefit?
