@@ -23,10 +23,53 @@ model_pt1 <- lm(vote ~ age + income + NEP + risk + bid, data = whale_data, famil
 
 summary(model_pt1)
 
-summary(model_pt1)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Part 2:
+
+```{r}
+coeffs <- coefficients(model_pt1); coeffs
+
+
+vote <- function(a,b,c,d,f,g,h,j,k,l,m){ coeffs[2](a) + coeffs[3](b) + coeffs[4](c) + coeffs[5](d) + coeffs[6](f) + coeffs[7](g) + coeffs[8](h) + coeffs[9](j) + coeffs[10](k) + coeffs[11](l) +  coeffs[12](m) + coeffs[1]
+}
+
+
+bid_fifteen<- function (a,b,c,d,e,g,h,j,k,l,m) {(1- (coeffs[2](a) + coeffs[3](b) + coeffs[4](c) + coeffs[5](d) + coeffs[6](f) + coeffs[7](g) + coeffs[8](h) + coeffs[9](j) + coeffs[10](k) + coeffs[11](l) +  coeffs[11](m) + coeffs[1])/coeff[12])
+}
+
+bid_single<- bidfifteen/15
+
 
 ```
-Part 2:
+
+Original Function
+vote <- function(a,b,c,d,f,g,h,j,k,l,m){ 0.0099816(a) + -0.0201190(b) +-0.0162261(c) +0.0204401(d) +0.0088282(f) +0.0027386(g)+0.0074891(h)+ 0.0467922(j)+0.0158639(k)+ 0.0007445(l) +  -0.0010699(m) + 0.1196977
+}
 
 
 Use 60% as your risk and know that that saves 15 whales. Solve. 
@@ -34,6 +77,35 @@ Have vote as 1 and solve for bid. Then divide by 15 to get value of 1 whale
 
 Part 3:
 Pick three people and put in their info and solve for vote. Then set vote to 1 and solve for bid. 
+```{r}
+
+vote1 <- function(a,b,c,d,f,g,h,j,k,l,m){ coeffs[2](a) + coeffs[3](b) + coeffs[4](c) + coeffs[5](d) + coeffs[6](f) + coeffs[7](g) + coeffs[8](h) + coeffs[9](j) + coeffs[10](k) + coeffs[11](l) +  coeffs[12](m) + coeffs[1]
+}
+
+
+bid1 <- function (a,b,c,d,e,g,h,j,k,l,m) {(1- (coeffs[2](a) + coeffs[3](b) + coeffs[4](c) + coeffs[5](d) + coeffs[6](f) + coeffs[7](g) + coeffs[8](h) + coeffs[9](j) + coeffs[10](k) + coeffs[11](l) +  coeffs[11](m) + coeffs[1])/coeff[12])
+}
+
+vote2 <- function(a,b,c,d,f,g,h,j,k,l,m){ coeffs[2](a) + coeffs[3](b) + coeffs[4](c) + coeffs[5](d) + coeffs[6](f) + coeffs[7](g) + coeffs[8](h) + coeffs[9](j) + coeffs[10](k) + coeffs[11](l) +  coeffs[12](m) + coeffs[1]
+}
+
+
+bid2 <- function (a,b,c,d,e,g,h,j,k,l,m) {(1- (coeffs[2](a) + coeffs[3](b) + coeffs[4](c) + coeffs[5](d) + coeffs[6](f) + coeffs[7](g) + coeffs[8](h) + coeffs[9](j) + coeffs[10](k) + coeffs[11](l) +  coeffs[11](m) + coeffs[1])/coeff[12])
+}
+
+vote3 <- function(a,b,c,d,f,g,h,j,k,l,m){ coeffs[2](a) + coeffs[3](b) + coeffs[4](c) + coeffs[5](d) + coeffs[6](f) + coeffs[7](g) + coeffs[8](h) + coeffs[9](j) + coeffs[10](k) + coeffs[11](l) +  coeffs[12](m) + coeffs[1]
+}
+
+
+bid3 <- function (a,b,c,d,e,g,h,j,k,l,m) {(1- (coeffs[2](a) + coeffs[3](b) + coeffs[4](c) + coeffs[5](d) + coeffs[6](f) + coeffs[7](g) + coeffs[8](h) + coeffs[9](j) + coeffs[10](k) + coeffs[11](l) +  coeffs[11](m) + coeffs[1])/coeff[12])
+}
+
+bid1
+bid2
+bid3
+
+```
+
 
 Part 4:
 Would you take the average of all parameters and plug that in to solve for vote, then set vote to 1 and solve for bid?
