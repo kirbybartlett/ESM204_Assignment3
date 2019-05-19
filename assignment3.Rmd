@@ -23,6 +23,8 @@ model_pt1 <- lm(vote ~ age + income + NEP + risk + bid, data = whale_data, famil
 
 summary(model_pt1)
 
+coeffs <- coefficients(model_pt1); coeffs
+
 ```
 
 
@@ -52,17 +54,20 @@ summary(model_pt1)
 Part 2:
 
 ```{r}
-coeffs <- coefficients(model_pt1); coeffs
 
 
-vote <- function(a,b,c,d,f,g,h,j,k,l,m){ coeffs[2](a) + coeffs[3](b) + coeffs[4](c) + coeffs[5](d) + coeffs[6](f) + coeffs[7](g) + coeffs[8](h) + coeffs[9](j) + coeffs[10](k) + coeffs[11](l) +  coeffs[12](m) + coeffs[1]
+
+#assume vote = 1, all constants stay the same (cancel out) but risk reduction moved from 0% to 4%
+
+bid_single <- function (l) {bid_one = (1 - coeffs[11]*(l))/coeffs[12]
+return(bid_one)
 }
 
+bid_single(l=.04)
+#934.6428
+#coeff11 is the risk, coeff 12 is the bid
 
-bid_fifteen<- function (a,b,c,d,e,g,h,j,k,l,m) {(1- (coeffs[2](a) + coeffs[3](b) + coeffs[4](c) + coeffs[5](d) + coeffs[6](f) + coeffs[7](g) + coeffs[8](h) + coeffs[9](j) + coeffs[10](k) + coeffs[11](l) +  coeffs[11](m) + coeffs[1])/coeff[12])
-}
 
-bid_single<- bidfifteen/15
 
 ```
 
@@ -71,52 +76,100 @@ vote <- function(a,b,c,d,f,g,h,j,k,l,m){ 0.0099816(a) + -0.0201190(b) +-0.016226
 }
 
 
-Use 60% as your risk and know that that saves 15 whales. Solve. 
-Have vote as 1 and solve for bid. Then divide by 15 to get value of 1 whale
+Use 60% as your risk and know that that saves 15 whales. Solve. So 4% risk saves 1 whale
 
 Part 3:
 Pick three people and put in their info and solve for vote. Then set vote to 1 and solve for bid. 
 ```{r}
+#row 17
+vote1 <- function(a,b,c,d,f,g,h,j,k,l,m){ person1v = coeffs[2]*(a) + coeffs[3]*(b) + coeffs[4]*(c) + coeffs[5]*(d) + coeffs[6]*(f) + coeffs[7]*(g) + coeffs[8]*(h) + coeffs[9]*(j) + coeffs[10]*(k) + coeffs[11]*(l) +  coeffs[12]*(m) + coeffs[1]
+return(person1v)
+}
+vote1(a= 0, b= 1, c= 0, d= 0, f= 0,g= 1, h=0 , j=0 , k= 30, l=.2 , m=40 )
+#0.5514511 
 
-vote1 <- function(a,b,c,d,f,g,h,j,k,l,m){ coeffs[2](a) + coeffs[3](b) + coeffs[4](c) + coeffs[5](d) + coeffs[6](f) + coeffs[7](g) + coeffs[8](h) + coeffs[9](j) + coeffs[10](k) + coeffs[11](l) +  coeffs[12](m) + coeffs[1]
+
+bid1 <- function (a,b,c,d,g,h,j,k,l,m) {person1b = .5514511  - (coeffs[2]*(a) + coeffs[3]*(b) + coeffs[4]*(c) + coeffs[5]*(d) + coeffs[6]*(f) + coeffs[7]*(g) + coeffs[8]*(h) + coeffs[9]*(j) + coeffs[10]*(k) + coeffs[11]*(l) + coeffs[1])/coeff[12]
+return(person1b)
 }
 
+bid1(a= 0, b= 1, c=0 , d=0 , f=0, g=1 , h=0 , j=0 , k= 30, l=.6)
 
-bid1 <- function (a,b,c,d,e,g,h,j,k,l,m) {(1- (coeffs[2](a) + coeffs[3](b) + coeffs[4](c) + coeffs[5](d) + coeffs[6](f) + coeffs[7](g) + coeffs[8](h) + coeffs[9](j) + coeffs[10](k) + coeffs[11](l) +  coeffs[11](m) + coeffs[1])/coeff[12])
+#row 230
+vote2 <- function(a,b,c,d,f,g,h,j,k,l,m){person2v = coeffs[2]*(a) + coeffs[3]*(b) + coeffs[4]*(c) + coeffs[5]*(d) + coeffs[6]*(f) + coeffs[7]*(g) + coeffs[8]*(h) + coeffs[9]*(j) + coeffs[10]*(k) + coeffs[11]*(l) +  coeffs[12]*(m) + coeffs[1]
+return(person2v)}
+
+vote2(a= 0, b= 0, c= 0, d= 0, f= 0,g= 0, h= 0, j= 1, k= 23, l=.6 , m=80 )
+#0.4462145
+
+bid2 <- function (a,b,c,d,g,h,j,k,l,m) {person2b = (0.4462145- (coeffs[2]*(a) + coeffs[3]*(b) + coeffs[4]*(c) + coeffs[5]*(d) + coeffs[6]*(f) + coeffs[7]*(g) + coeffs[8]*(h) + coeffs[9]*(j) + coeffs[10]*(k) + coeffs[11]*(l) +  coeffs[11]*(m) + coeffs[1])/coeff[12])
+return(person2b)
 }
 
-vote2 <- function(a,b,c,d,f,g,h,j,k,l,m){ coeffs[2](a) + coeffs[3](b) + coeffs[4](c) + coeffs[5](d) + coeffs[6](f) + coeffs[7](g) + coeffs[8](h) + coeffs[9](j) + coeffs[10](k) + coeffs[11](l) +  coeffs[12](m) + coeffs[1]
+bid2(a= 0, b= 0, c= 0, d= 0, f= 0,g= 0, h= 0, j= 1, k= 23, l=.6)
+
+#row400
+
+vote3 <- function(a,b,c,d,f,g,h,j,k,l,m){person3v = coeffs[2]*(a) + coeffs[3]*(b) + coeffs[4]*(c) + coeffs[5]*(d) + coeffs[6]*(f) + coeffs[7]*(g) + coeffs[8]*(h) + coeffs[9]*(j) + coeffs[10]*(k) + coeffs[11]*(l) +  coeffs[12]*(m) + coeffs[1]
+return(person3v)
+}
+# 0.5469224 
+
+vote3(a=0 , b= 0, c= 0, d= 1, f= 0,g= 0, h= 0, j= 0, k= 31, l= .8, m=80)
+
+bid3 <- function (a,b,c,d,g,h,j,k,l,m) {person3b = ( 0.5469224 - (coeffs[2]*(a) + coeffs[3]*(b) + coeffs[4]*(c) + coeffs[5]*(d) + coeffs[6]*(f) + coeffs[7]*(g) + coeffs[8]*(h) + coeffs[9]*(j) + coeffs[10]*(k) + coeffs[11]*(l) +  coeffs[11]*(m) + coeffs[1])/coeff[12])
+return(person3b)
 }
 
-
-bid2 <- function (a,b,c,d,e,g,h,j,k,l,m) {(1- (coeffs[2](a) + coeffs[3](b) + coeffs[4](c) + coeffs[5](d) + coeffs[6](f) + coeffs[7](g) + coeffs[8](h) + coeffs[9](j) + coeffs[10](k) + coeffs[11](l) +  coeffs[11](m) + coeffs[1])/coeff[12])
-}
-
-vote3 <- function(a,b,c,d,f,g,h,j,k,l,m){ coeffs[2](a) + coeffs[3](b) + coeffs[4](c) + coeffs[5](d) + coeffs[6](f) + coeffs[7](g) + coeffs[8](h) + coeffs[9](j) + coeffs[10](k) + coeffs[11](l) +  coeffs[12](m) + coeffs[1]
-}
-
-
-bid3 <- function (a,b,c,d,e,g,h,j,k,l,m) {(1- (coeffs[2](a) + coeffs[3](b) + coeffs[4](c) + coeffs[5](d) + coeffs[6](f) + coeffs[7](g) + coeffs[8](h) + coeffs[9](j) + coeffs[10](k) + coeffs[11](l) +  coeffs[11](m) + coeffs[1])/coeff[12])
-}
-
-bid1
-bid2
-bid3
+bid3(a=0 , b= 0, c= 0, d= 1, f= 0,g= 0, h= 0, j= 0, k= 31, l= .6)
 
 ```
 
 
 Part 4:
-Would you take the average of all parameters and plug that in to solve for vote, then set vote to 1 and solve for bid?
+Would you take the average of all parameters and solve for bid?
+Tofifty and middle class would be the middle variables for categorical. Middle class is a reference level
+```{r}
+#find average NEP
+
+avg_NEP <- mean(whale_data$NEP)
+avg_NEP #38.366
+
+#eguationb for average bid assuming average age is to fifty and income is middle class
+bid_avg <- function (a,k,l) {average = (1- (coeffs[2]*(a) + coeffs[10]*(k)  +  coeffs[11]*(l) + coeffs[1])/coeffs[12])
+  return(average)
+}
+
+bid_avg(a = 1.0, k=38.366 , l= 0.6)
+#691.4974
+
+
+```
+
 
 Part 5:
 Multiply average by 150,000
+```{r}
+total_wtp <- bid_avg(a = 1.0, k=38.366 , l= 0.6) *150000
+total_wtp
+#103,724,610
+
+```
 
 Part 6:
-Compare answer in 5 to $7 million
+Compare answer in 5 to 7 million. The answer in part 5 is 103 million, so Santa Barbara residents are willing to pay 103 million to save whales, which outweighs the costs of $7 million to implement the VSR program. There is a net benefit of 97 million dollars to the community.
+
 
 Part 7:
 Is it $50 per ton? Because 50x20 tons carbon saved is 1,000 dollars which is the cost of going slower
 
 Part 8:
-60% risk reduction means 15 whales saved? Multiply what you found in part 2 by 15 to get the total benefit?
+60% risk reduction means 15 whales saved? Multiply what you found in part 2 by 15 to get the social benefit? Since there is no cost associated with the trade you can ignore the $7 million VSR cost.
+
+```{r}
+social_benefit <-bid_single(l=.04)*15
+social_benefit
+#14019.64 
+
+```
+
