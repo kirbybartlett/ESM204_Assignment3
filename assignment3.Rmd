@@ -105,7 +105,9 @@ bid3 #159.86
 
 Part 4:
 Would you take the average of all parameters and solve for bid?
-Tofifty and middle class would be the middle variables for categorical. Middle class is a reference level
+Tofifty and middle class would be the middle variables for categorical since they are median
+use .5 is the average vote 
+use mean NEP
 ```{r}
 #find average NEP
 
@@ -113,10 +115,10 @@ avg_NEP <- mean(whale_data$NEP)
 avg_NEP #38.366
 
 #eguationb for average bid assuming average age is to fifty and income is middle class
-bid_avg = (.70 - 0.0099816*1 - 0.0158639*38.366 - 0.0007445*60 - 0.1196977) / -0.0010699
+bid_avg = (.5 - 0.0099816*1 - 0.0158639*38.366 - 0.0007445*60 - 0.1196977) / -0.0010699
 
 bid_avg
-#77.5621
+#264.4955
 
 
 ```
@@ -127,12 +129,12 @@ Multiply average by 150,000
 ```{r}
 total_wtp <- bid_avg *150000
 total_wtp
-#11,634,315
+#39,674,318
 
 ```
 
 Part 6:
-Compare answer in 5 to 7 million. The answer in part 5 is 11.6 million, so Santa Barbara residents are willing to pay 11.6 million to save whales, which outweighs the costs of $7 million to implement the VSR program. There is a net benefit of 4.6 million dollars to the community.
+Compare answer in 5 to 7 million. The answer in part 5 is 39.7 million, so Santa Barbara residents are willing to pay 11.6 million to save whales, which outweighs the costs of $7 million to implement the VSR program. There is a net benefit of 32.7 million dollars to the community.
 
 
 Part 7:
