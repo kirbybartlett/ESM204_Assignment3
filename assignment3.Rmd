@@ -139,12 +139,11 @@ Part 7:
 Is it $50 per ton? Because 50x20 tons carbon saved is 1,000 dollars which is the cost of going slower
 
 Part 8:
-60% risk reduction means 15 whales saved? Multiply what you found in part 2 by 15 to get the social benefit? Since there is no cost associated with the trade you can ignore the $7 million VSR cost.
+Same number as #5
+Value of offset carbon per ship is 1000 which is the same of the compliance cost per ship, $1000 so that cancels.
 
 ```{r}
-social_benefit <-bid_single*15
-social_benefit
-#41.75 which doesnt make sense
+total_wtp + 1000 - 1000
 
 ```
 
