@@ -24,11 +24,15 @@ model_pt1 <- lm(vote ~ age + income + NEP + risk + bid, data = whale_data, famil
 summary(model_pt1)
 ```
 
+<<<<<<< HEAD
 ```{r}
 #pull coefficients out 
 coeffs <- coefficients(model_pt1) ; coeffs
 
 coeffs[5]
+=======
+coeffs <- coefficients(model_pt1); coeffs
+>>>>>>> af9d3ad1145fa1dad5b619176d575639eac42e45
 
 
 newdata <- data.frame(agetofifty=1,
@@ -47,17 +51,135 @@ newdata <- data.frame(agetofifty=1,
 predict(model_pt1, newdata)
 ```
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> af9d3ad1145fa1dad5b619176d575639eac42e45
 Part 2:
 
+```{r}
 
-Use 60% as your risk and know that that saves 15 whales. Solve. 
-Have vote as 1 and solve for bid. Then divide by 15 to get value of 1 whale
+#assume vote = 1, all constants stay the same (cancel out) but risk reduction moved from 0% to 4%
+
+bid_single = -(0.0007445*4)/-0.0010699
+
+bid_single  
+#2.78
+#coeff11 is the risk, coeff 12 is the bid
+
+
+
+```
+
+Original Function
+vote <- function(a,b,c,d,f,g,h,j,k,l,m){ 0.0099816(a) + -0.0201190(b) +-0.0162261(c) +0.0204401(d) +0.0088282(f) +0.0027386(g)+0.0074891(h)+ 0.0467922(j)+0.0158639(k)+ 0.0007445(l) +  -0.0010699(m) + 0.1196977
+}
+
+Bid equation
+bid <- (vote – 0.0099816(agetofifty) - -0.0201190(agetoforty) - -0.0162261(agetosixty) -0.0204401(agetothrity) - 0.0088282(income_onepercent) -0.0027386(incomepoor) - 0.0074891(incomerich) - 0.0467922(income_veryrich) - 0.0158639(NEP) - 0.0007445(risk) - 0.1196977) / -0.0010699
+
+
+Use 60% as your risk and know that that saves 15 whales. Solve. So 4% risk saves 1 whale
 
 Part 3:
 Pick three people and put in their info and solve for vote. Then set vote to 1 and solve for bid. 
 
+
+```{r}
+#row 17
+
+bid1= (.5 + 0.0201190*1 - 0.0027386*1 - 0.0158639*30 - 0.0007445*20 - 0.1196977) /(-0.0010699)
+
+bid1 #87.04
+
+#row 230
+
+bid2 = (.5- 0.0099816*1 - 0.0088282*1 - 0.0158639*23 - 0.0007445*60 - 0.1196977) / -0.0010699
+
+bid2 #44.90
+
+#row400
+
+bid3 = (.5- 0.0158639*31 - 0.0007445*80 - 0.1196977) / -0.0010699
+
+bid3 #159.86
+
+```
+
+```{r}
+#Table of the three bids
+bid_df <- data.frame(round(bid1, 2), round(bid2, 2), round(bid3, 2))
+
+
+```
+
+
 Part 4:
-Would you take the average of all parameters and plug that in to solve for vote, then set vote to 1 and solve for bid?
+Would you take the average of all parameters and solve for bid?
+Tofifty and middle class would be the middle variables for categorical since they are median
+use .5 is the average vote 
+use mean NEP
+```{r}
+#find average NEP
+
+avg_NEP <- mean(whale_data$NEP)
+avg_NEP #38.366
+
+#eguationb for average bid assuming average age is to fifty and income is middle class
+bid_avg = (.5 - 0.0099816*1 - 0.0158639*38.366 - 0.0007445*60 - 0.1196977) / -0.0010699
+
+bid_avg
+#264.4955
+
+
+```
+
 
 Part 5:
 Multiply average by 150,000
+```{r}
+total_wtp <- bid_avg *150000
+total_wtp
+#39,674,318
+
+```
+
+Part 6:
+Compare answer in 5 to 7 million. The answer in part 5 is 39.7 million, so Santa Barbara residents are willing to pay 11.6 million to save whales, which outweighs the costs of $7 million to implement the VSR program. There is a net benefit of 32.7 million dollars to the community.
+
+
+Part 7:
+Is it $50 per ton? Because 50x20 tons carbon saved is 1,000 dollars which is the cost of going slower
+
+Part 8:
+Same number as #5
+Value of offset carbon per ship is 1000 which is the same of the compliance cost per ship, $1000 so that cancels.
+
+```{r}
+total_wtp + 1000 - 1000
+
+```
+
