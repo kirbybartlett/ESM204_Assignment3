@@ -22,10 +22,31 @@ binomial linear regression for part 1
 model_pt1 <- lm(vote ~ age + income + NEP + risk + bid, data = whale_data, family = "linear")
 
 summary(model_pt1)
-
-summary(model_pt1)
-
 ```
+
+```{r}
+#pull coefficients out 
+coeffs <- coefficients(model_pt1) ; coeffs
+
+coeffs[5]
+
+
+newdata <- data.frame(agetofifty=1,
+                      agetoforty=0,
+                      agetosixty=0,
+                      agetothirty=0,
+                      incomeone_percent=1,
+                      incomepoor=0,
+                      incomerich=0,
+                      incomevery_rich=0,
+                      NEP=40,
+                      risk = 0.6,
+                      bid=20)
+
+
+predict(model_pt1, newdata)
+```
+
 Part 2:
 
 
