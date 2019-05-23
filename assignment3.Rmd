@@ -111,9 +111,9 @@ Pick three people and put in their info and solve for vote. Then set vote to 1 a
 ```{r}
 #row 17
 
-bid1= (.5 + 0.0201190*1 - 0.0027386*1 - 0.0158639*30 - 0.0007445*20 - 0.1196977) /(-0.0010699)
+bid1= (.5 + 0.0201190*1 - 0.0027386*1 - 0.0158639*30 - 0.0007445*60 - 0.1196977) /(-0.0010699)
 
-bid1 #87.04
+bid1 #114.87
 
 #row 230
 
@@ -123,9 +123,9 @@ bid2 #44.90
 
 #row400
 
-bid3 = (.5- 0.0158639*31 - 0.0007445*80 - 0.1196977) / -0.0010699
+bid3 = (.5- 0.0158639*31 - 0.0007445*60 - 0.1196977) / -0.0010699
 
-bid3 #159.86
+bid3 #145.94
 
 ```
 
@@ -148,11 +148,12 @@ use mean NEP
 avg_NEP <- mean(whale_data$NEP)
 avg_NEP #38.366
 
-#eguationb for average bid assuming average age is to fifty and income is middle class
-bid_avg = (.5 - 0.0099816*1 - 0.0158639*38.366 - 0.0007445*60 - 0.1196977) / -0.0010699
+#eguationb for average bid median age is tofifty median income is rich
+
+bid_avg = (.5 - 0.0099816*1 -  0.0074891*1 - 0.0158639*38.366 - 0.0007445*60 - 0.1196977) / -0.0010699
 
 bid_avg
-#264.4955
+#271.4953
 
 
 ```
@@ -163,7 +164,7 @@ Multiply average by 150,000
 ```{r}
 total_wtp <- bid_avg *150000
 total_wtp
-#39,674,318
+#40724290
 
 ```
 
