@@ -184,3 +184,24 @@ total_wtp + 1000 - 1000
 
 ```
 
+binomial linear regression for part 1- EC
+```{r}
+model_ec1 <- glm(vote ~ age + income + NEP + risk + bid, data = whale_data, family = "binomial")
+summary(model_ec1)
+#Same reference levels
+#again only NEP significant
+#same coeffs are pos/neg but in this model intercept is negative too
+
+bid_bavg = (.5 - 0.060219*1 - 0.062771*1 -  0.083213*38.366 - 0.004169*60 +2.088292) / -0.005865
+
+bid_bavg
+#166.6476
+#less than with linear model
+
+total_bbid = bid_bavg*150000
+
+total_bbid
+#24997134
+#less than with linear model, but still over 7 million so the VSR is worthwhile
+
+```
